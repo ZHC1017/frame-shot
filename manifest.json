@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "Frame Shot · 定尺寸截图",
+  "description": "原网页定尺寸截图和自动滚动长图，支持拖动裁剪、复制及保存 PNG。",
+  "version": "0.3.0",
+  "minimum_chrome_version": "109",
+  "permissions": ["activeTab", "scripting", "storage", "clipboardWrite"],
+  "background": { "service_worker": "background.js", "type": "module" },
+  "action": {
+    "default_title": "框选当前网页 · Frame Shot",
+    "default_icon": { "16": "icons/16.png", "32": "icons/32.png", "128": "icons/128.png" }
+  },
+  "icons": { "16": "icons/16.png", "32": "icons/32.png", "48": "icons/48.png", "128": "icons/128.png" },
+  "commands": {
+    "_execute_action": {
+      "suggested_key": { "default": "Ctrl+Shift+Y", "mac": "Command+Shift+Y" },
+      "description": "截取当前网页并打开选框"
+    },
+    "capture-scroll": {
+      "suggested_key": { "default": "Ctrl+Shift+U", "mac": "Command+Shift+U" },
+      "description": "自动滚动截取网页长图"
+    }
+  },
+  "web_accessible_resources": [
+    { "resources": ["overlay.html"], "matches": ["<all_urls>"] }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'none'; base-uri 'none'"
+  }
+}

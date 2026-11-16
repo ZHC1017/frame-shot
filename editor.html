@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Frame Shot · 定尺寸截图</title>
+  <link rel="icon" href="icons/32.png">
+  <link rel="stylesheet" href="editor.css">
+  <script type="module" src="editor.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="editor.html" aria-label="Frame Shot 首页"><span class="brand-mark">⌗</span> Frame Shot <span class="version">v0.3.0</span></a>
+    <div class="top-meta"><span class="live-dot"></span><span id="source-title">网页截图工作台</span></div>
+    <button id="cancel" class="quiet">取消 <kbd>Esc</kbd></button>
+  </header>
+  <main>
+    <section class="workspace" aria-label="截图编辑区域">
+      <div class="workspace-heading"><div><span class="eyebrow">CAPTURE STUDIO</span><h1>让每一张截图，尺寸刚好。</h1></div><span id="image-meta" class="pill">等待截图</span></div>
+      <div id="mode-banner" class="mode-banner" role="status" hidden></div>
+      <div id="viewport" class="viewport">
+        <div id="empty" class="empty"><span class="empty-icon">⌗</span><h2 id="empty-title">从你想截取的网页开始</h2><p id="empty-message">打开网页，点击 Chrome 工具栏中的 Frame Shot 图标。<br>我们会冻结当前画面，在这里精确框选。</p><a class="demo-link" href="editor.html?demo=1">体验示例画面 <span>↗</span></a></div>
+        <div id="image-wrap" class="image-wrap" hidden>
+          <img id="source-image" alt="待裁剪的网页截图" draggable="false">
+          <div id="selection" class="selection" tabindex="0" role="group" aria-label="截图选框，可使用方向键移动">
+            <span id="selection-label" class="selection-label">800 × 600</span>
+            <div class="thirds" aria-hidden="true"></div>
+            <span class="move-label" aria-hidden="true">拖动选框</span>
+            <button class="handle nw" data-handle="nw" aria-label="拖动左上角调整尺寸"></button><button class="handle n" data-handle="n" aria-label="拖动上边调整尺寸"></button><button class="handle ne" data-handle="ne" aria-label="拖动右上角调整尺寸"></button><button class="handle e" data-handle="e" aria-label="拖动右边调整尺寸"></button><button class="handle se" data-handle="se" aria-label="拖动右下角调整尺寸"></button><button class="handle s" data-handle="s" aria-label="拖动下边调整尺寸"></button><button class="handle sw" data-handle="sw" aria-label="拖动左下角调整尺寸"></button><button class="handle w" data-handle="w" aria-label="拖动左边调整尺寸"></button>
+          </div>
+        </div>
+      </div>
+      <footer class="workspace-footer"><span id="zoom-label">原始像素精确裁剪</span><div class="view-controls"><button id="select-all" type="button">选择整图</button><select id="view-mode" aria-label="预览缩放"><option value="fit">适应窗口</option><option value="width">适应宽度</option><option value="actual">实际大小</option></select></div><span class="key-help"><kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> 微调 1 px <i>·</i> <kbd>Shift</kbd> 加速 10 px</span></footer>
+    </section>
+    <aside class="sidebar" aria-label="截图设置">
+      <div class="sidebar-title"><span class="eyebrow">YOUR FRAME</span><h2>选框设置</h2><p>先设好尺寸，再找到最好的位置。</p></div>
+      <form id="size-form" novalidate>
+        <div class="section-label"><label for="width">选框尺寸</label><span>图片像素 / px</span></div>
+        <div class="dimensions"><label>宽度<input id="width" type="number" min="1" step="1" value="800" required inputmode="numeric"></label><span>×</span><label>高度<input id="height" type="number" min="1" step="1" value="600" required inputmode="numeric"></label><button id="swap" type="button" class="swap" title="交换宽高" aria-label="交换宽高">⇄</button></div>
+        <button id="apply-size" class="apply" type="submit">应用尺寸 <span>↵</span></button>
+      </form>
+      <div class="settings-block"><div class="section-label"><span>常用尺寸</span><button id="reset" class="text-button">恢复上次尺寸</button></div><div class="presets"><button data-size="800,600"><b>800 × 600</b><span>经典 · 4:3</span></button><button data-size="1280,720"><b>1280 × 720</b><span>宽屏 · 16:9</span></button><button data-size="600,600"><b>600 × 600</b><span>方形 · 1:1</span></button><button data-size="390,844"><b>390 × 844</b><span>竖版</span></button></div></div>
+      <div class="settings-block"><label class="section-label" for="mode">调整方式</label><select id="mode"><option value="free">自由调整尺寸</option><option value="size">锁定尺寸，仅移动</option><option value="ratio">锁定当前比例</option></select><p id="mode-description" class="hint">拖动边角改变宽高，尺寸实时更新。</p></div>
+      <div id="result" class="result" hidden><img id="result-image" alt="最近导出的截图预览"><div><strong id="result-title">已复制到剪贴板</strong><span id="result-meta"></span></div></div>
+      <div class="actions"><div id="status" class="status" role="status" aria-live="polite">仅在本机处理，截图不会上传。</div><button id="copy" class="primary" disabled><span>复制截图</span><kbd>Enter ↵</kbd></button><button id="download" class="secondary" disabled>保存 PNG <span>↓</span></button><p class="privacy">PNG 无损输出 · 选框尺寸即图片尺寸</p></div>
+    </aside>
+  </main>
+</body>
+</html>

@@ -1,0 +1,18 @@
+# Local files and development artifacts
+.DS_Store
+node_modules/
+work/
+*-profile/
+*-profile-*/
+coverage/
+*.log
+*.zip
+
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx

@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Frame Shot · 原网页框选</title>
+  <link rel="stylesheet" href="overlay.css"><script type="module" src="overlay.js"></script>
+</head>
+<body>
+  <div id="surface" class="surface" aria-label="原网页截图区域">
+    <img id="source" alt="当前网页的冻结画面" draggable="false">
+    <div id="selection" class="selection" tabindex="0" role="group" aria-label="截图选框">
+      <span id="measurement" class="measurement">800 × 600 px</span><div class="grid" aria-hidden="true"></div>
+      <button class="handle nw" data-handle="nw" aria-label="调整左上角"></button><button class="handle n" data-handle="n" aria-label="调整上边"></button><button class="handle ne" data-handle="ne" aria-label="调整右上角"></button><button class="handle e" data-handle="e" aria-label="调整右边"></button><button class="handle se" data-handle="se" aria-label="调整右下角"></button><button class="handle s" data-handle="s" aria-label="调整下边"></button><button class="handle sw" data-handle="sw" aria-label="调整左下角"></button><button class="handle w" data-handle="w" aria-label="调整左边"></button>
+    </div>
+  </div>
+  <div id="intro" class="intro"><span class="intro-mark">⌗</span><span>Frame Shot</span><span class="intro-divider"></span><span id="intro-text">拖动选框，截取刚好的画面</span></div>
+  <div class="bottom" id="bottom">
+    <div id="notice" class="notice" role="status" aria-live="polite">拖动空白处新建选框 · 方向键微调 · Shift 加速 · Esc 取消</div>
+    <form id="toolbar" class="toolbar" aria-label="截图悬浮工具栏" novalidate>
+      <button type="button" id="cancel" class="icon-button" aria-label="取消截图" title="取消 · Esc">×</button><span class="separator"></span>
+      <span class="frame-icon" aria-hidden="true">▣</span>
+      <label class="dimension">宽<input id="width" type="number" min="1" step="1" value="800" aria-label="选框宽度"></label><span class="times">×</span><label class="dimension">高<input id="height" type="number" min="1" step="1" value="600" aria-label="选框高度"></label><span class="unit">px</span>
+      <button id="apply" class="icon-button apply-button" type="submit" aria-label="应用尺寸" title="应用尺寸">↵</button>
+      <span class="separator"></span>
+      <select id="presets" aria-label="尺寸预设"><option value="">尺寸预设</option><option value="800,600">800 × 600</option><option value="1280,720">1280 × 720</option><option value="600,600">600 × 600</option><option value="390,844">390 × 844</option></select>
+      <select id="mode" aria-label="调整方式"><option value="free">自由调整</option><option value="size">锁定尺寸</option><option value="ratio">锁定比例</option></select><span class="separator"></span>
+      <button id="save" class="icon-button" type="button" aria-label="保存 PNG" title="保存 PNG">↓</button>
+      <button id="scroll" class="scroll-button" type="button" title="从页面顶部自动滚动拼接长图">↧ 滚动长图</button>
+      <button id="copy" class="capture-button" type="button">截取并复制 <kbd>↵</kbd></button>
+    </form>
+  </div>
+  <div id="success" class="success" role="status" hidden><span>✓</span><div><strong>已复制到剪贴板</strong><small id="success-size"></small></div></div>
+</body>
+</html>
